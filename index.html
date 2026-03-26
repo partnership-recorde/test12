@@ -2399,7 +2399,7 @@ async function shareThreads() {
   const { text, url } = getThreadsShareText();
   if (navigator.share) {
     try {
-      await navigator.share({ text: text });
+      await navigator.share({ text: text, url: url });
     } catch(e) {
       if (e.name !== 'AbortError') copyToClipboard(text);
     }
