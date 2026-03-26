@@ -656,6 +656,97 @@
   }
   .ig-hint span { color: var(--accent-a); }
 
+  /* ===== Threads シェアセクション ===== */
+  .threads-section {
+    margin-top: 16px;
+    background: #101010;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 16px 18px;
+    text-align: center;
+  }
+  .threads-section-label {
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .threads-btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-threads {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: #fff;
+    color: #101010;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  }
+  .btn-threads:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.5); }
+  .btn-threads svg { width: 16px; height: 16px; }
+  .btn-copy-threads {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: transparent;
+    color: #ccc;
+  }
+  .btn-copy-threads:hover { border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-2px); }
+  .btn-copy-threads svg { width: 14px; height: 14px; }
+  .threads-hint {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /* ===== トースト通知 ===== */
+  #copy-toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #1e1e1e;
+    color: #fff;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    padding: 12px 24px;
+    border-radius: 40px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 9999;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+  #copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   .btn-retry {
     display: inline-flex;
     align-items: center;
@@ -1529,6 +1620,7 @@
 </head>
 <body>
 <div class="grain"></div>
+<div id="copy-toast">📋 コピーしました！Threadsに貼り付けて投稿してね</div>
 
 <div class="wrapper">
 
@@ -1745,6 +1837,24 @@
         </button>
         <p class="ig-hint">📸 ダウンロードした画像を<br><span>Instagramに投稿</span>してシェアしてね！</p>
       </div>
+      <!-- Threads シェア -->
+      <div class="threads-section">
+        <span class="threads-section-label">SHARE ON THREADS</span>
+        <div class="threads-btn-row">
+          <button class="btn-threads" onclick="shareThreads()">
+            <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill="currentColor" d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.777 0-27.076 6.312-34.604 17.8l13.563 9.325c5.648-8.56 14.518-10.395 21.041-10.395h.23c8.131.052 14.26 2.419 18.223 7.038 2.892 3.38 4.82 8.057 5.764 13.957-7.186-1.218-14.97-1.592-23.278-1.12-23.44 1.35-38.508 15.087-37.551 34.137.487 9.641 5.494 17.913 14.113 23.27 7.22 4.585 16.512 6.82 26.16 6.285 12.74-.712 22.727-5.535 29.677-14.33 5.29-6.756 8.636-15.508 10.096-26.52 6.061 3.66 10.541 8.491 13.012 14.384 4.497 10.777 4.765 28.489-9.173 42.36-12.208 12.15-26.875 17.408-49.023 17.565-24.552-.174-43.154-8.045-55.294-23.4-11.383-14.424-17.237-35.12-17.408-61.5.171-26.38 5.989-47.077 17.408-61.5 12.14-15.356 30.742-23.227 55.294-23.4 24.723.174 43.658 8.082 56.292 23.505 6.194 7.558 10.757 17.026 13.573 28.064l15.797-4.216c-3.42-13.733-9.381-25.477-17.815-35.072C136.36 11.427 113.35 1.185 84.194 1l-.397.001C54.725 1.187 31.408 11.457 16.318 30.625 2.926 47.706-3.678 71.77-3.866 96.003c.188 24.233 6.792 48.297 20.184 65.378C31.408 180.549 54.725 190.819 83.797 191l.397.001c26.568-.183 45.71-7.12 61.339-22.618 20.65-20.514 19.961-46.105 13.194-61.875-4.702-11.267-13.711-20.458-17.19-17.52ZM96.68 146.759c-10.277.574-20.966-2.025-27.616-6.589-5.196-3.301-7.879-7.801-8.105-13.372-.477-10.66 7.64-17.68 24.168-18.646 2.116-.122 4.206-.182 6.27-.182 6.024 0 11.668.557 16.858 1.629-1.913 23.836-11.817 36.56-11.575 37.16Z"/>
+            </svg>
+            Threadsでシェア
+          </button>
+          <button class="btn-copy-threads" onclick="copyThreadsText()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            テキストをコピー
+          </button>
+        </div>
+        <p class="threads-hint">📋 コピー後、Threadsアプリに貼り付けて投稿できます</p>
+      </div>
+
       <button class="btn-retry" onclick="retry()">
         ↩ もう一度診断する
       </button>
@@ -2088,6 +2198,74 @@ function applyResult(type) {
   document.getElementById('share-x').href = xHref;
   document.getElementById('share-fb').href = fbHref;
 
+}
+
+// ============================================================
+// Threads シェア機能
+// ============================================================
+function getThreadsShareText() {
+  const diagUrl = 'https://partnership-recorde.github.io/test12/';
+  // 現在表示中のタイプ名を取得（グローバルscores優先、次にlocalStorage）
+  let typeName = '';
+  const topEntry = Object.entries(scores).sort((a,b) => b[1]-a[1])[0];
+  if (topEntry && topEntry[1] > 0 && results[topEntry[0]]) {
+    typeName = results[topEntry[0]].name;
+  } else {
+    try {
+      const saved = localStorage.getItem('shindan_result');
+      if (saved) {
+        const r = JSON.parse(saved);
+        if (results[r.type]) typeName = results[r.type].name;
+      }
+    } catch(e) {}
+  }
+  const text = `私の診断結果は「${typeName}」でした！\n${diagUrl}\n#パートナーシップ・レコード`;
+  return { text, url: diagUrl };
+}
+
+function showCopyToast(msg) {
+  const toast = document.getElementById('copy-toast');
+  if (!toast) return;
+  toast.textContent = msg || '📋 コピーしました！Threadsに貼り付けて投稿してね';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+async function copyToClipboard(str) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(str);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = str;
+      ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    showCopyToast('📋 コピーしました！Threadsアプリに貼り付けて投稿してね');
+  } catch(e) {
+    showCopyToast('⚠️ コピーに失敗しました。手動でコピーしてください');
+  }
+}
+
+async function shareThreads() {
+  const { text, url } = getThreadsShareText();
+  if (navigator.share) {
+    try {
+      await navigator.share({ text: text });
+    } catch(e) {
+      if (e.name !== 'AbortError') copyToClipboard(text);
+    }
+  } else {
+    copyToClipboard(text);
+  }
+}
+
+function copyThreadsText() {
+  const { text } = getThreadsShareText();
+  copyToClipboard(text);
 }
 
 function downloadImage() {
