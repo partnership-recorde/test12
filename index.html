@@ -656,6 +656,43 @@
   }
   .ig-hint span { color: var(--accent-a); }
 
+  /* ===== note シェアセクション ===== */
+  .note-section {
+    margin-top: 16px;
+    background: var(--blush);
+    border: 1px solid rgba(212,160,181,0.2);
+    border-radius: 16px;
+    padding: 16px 18px;
+    text-align: center;
+  }
+  .btn-note-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 24px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: #41c9b4;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(65,201,180,0.35);
+  }
+  .btn-note-download:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(65,201,180,0.45); }
+  .btn-note-download svg { width: 16px; height: 16px; }
+  .note-hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .note-hint span { color: #41c9b4; font-weight: 600; }
+
   /* ===== Threads シェアセクション ===== */
   .threads-section {
     margin-top: 16px;
@@ -1594,6 +1631,9 @@
   .ig-section      { padding: 22px 26px; }
   .btn-ig-download { font-size: 18px; padding: 13px 22px; }
   .ig-hint         { font-size: 15px; }
+  .note-section    { padding: 22px 26px; }
+  .btn-note-download { font-size: 18px; padding: 13px 22px; }
+  .note-hint       { font-size: 15px; }
   .btn-retry       { font-size: 18px; margin-top: 26px; }
 
   /* ── メール画面 ── */
@@ -1836,6 +1876,14 @@
           画像をダウンロード
         </button>
         <p class="ig-hint">📸 ダウンロードした画像を<br><span>Instagramに投稿</span>してシェアしてね！</p>
+      </div>
+      <!-- note シェア -->
+      <div class="note-section">
+        <button class="btn-note-download" onclick="downloadImage()">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+          画像をダウンロード
+        </button>
+        <p class="note-hint">📝 ダウンロードした画像を<br><span>noteに添付</span>してシェアしてね！</p>
       </div>
       <!-- Threads シェア -->
       <div class="threads-section">
