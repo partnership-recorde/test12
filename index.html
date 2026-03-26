@@ -2358,8 +2358,32 @@ async function copyToClipboard(str) {
 }
 
 function copyShareText(platform) {
-  const { text } = getThreadsShareText(); // 同じシェアテキスト生成関数を流用
-  copyToClipboard(text);
+  const { text } = getThreadsShareText();
+  const msgs = {
+    ig:   '📋 コピーしました！Instagramに貼り付けて投稿してね',
+    note: '📋 コピーしました！noteに貼り付けて投稿してね',
+  };
+  const msg = msgs[platform] || '📋 コピーしました！';
+  _copyToClipboardWithMsg(text, msg);
+}
+
+async function _copyToClipboardWithMsg(str, successMsg) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(str);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = str;
+      ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    showCopyToast(successMsg);
+  } catch(e) {
+    showCopyToast('⚠️ コピーに失敗しました。手動でコピーしてください');
+  }
 }
 
 async function shareThreads() {
