@@ -2311,23 +2311,32 @@ function applyResult(type) {
 // Threads シェア機能
 // ============================================================
 function getThreadsShareText() {
-  const diagUrl = 'https://partnership-recorde.github.io/test12/';
-  // 現在表示中のタイプ名を取得（グローバルscores優先、次にlocalStorage）
+  const BASE_URL = 'https://partnership-recorde.github.io/test12/';
+  const TYPE_PAGES = {
+    hime:   BASE_URL + 'hime.html',
+    hero:   BASE_URL + 'hero.html',
+    megami: BASE_URL + 'megami.html',
+    ousama: BASE_URL + 'ousama.html',
+  };
+  // 現在表示中のタイプを取得（グローバルscores優先、次にlocalStorage）
   let typeName = '';
+  let typeKey = '';
   const topEntry = Object.entries(scores).sort((a,b) => b[1]-a[1])[0];
   if (topEntry && topEntry[1] > 0 && results[topEntry[0]]) {
-    typeName = results[topEntry[0]].name;
+    typeKey = topEntry[0];
+    typeName = results[typeKey].name;
   } else {
     try {
       const saved = localStorage.getItem('shindan_result');
       if (saved) {
         const r = JSON.parse(saved);
-        if (results[r.type]) typeName = results[r.type].name;
+        if (results[r.type]) { typeKey = r.type; typeName = results[r.type].name; }
       }
     } catch(e) {}
   }
-  const text = `私の診断結果は「${typeName}」でした！\n${diagUrl}\n#パートナーシップ・レコード`;
-  return { text, url: diagUrl };
+  const typeUrl = TYPE_PAGES[typeKey] || BASE_URL;
+  const text = `私の診断結果は「${typeName}」でした！\n${typeUrl}\n#パートナーシップ・レコード`;
+  return { text, url: typeUrl };
 }
 
 function showCopyToast(msg) {
