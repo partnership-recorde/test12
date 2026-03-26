@@ -628,11 +628,18 @@
     padding: 16px 18px;
     text-align: center;
   }
+  .ig-btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
   .btn-ig-download {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 11px 24px;
+    padding: 11px 22px;
     border-radius: 40px;
     font-family: 'Zen Kaku Gothic New', sans-serif;
     font-size: 13px;
@@ -648,6 +655,24 @@
   }
   .btn-ig-download:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(220,39,67,0.35); }
   .btn-ig-download svg { width: 16px; height: 16px; }
+  .btn-copy-ig {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid rgba(194,133,90,0.35);
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: #fff;
+    color: var(--text);
+  }
+  .btn-copy-ig:hover { border-color: var(--accent-b); color: var(--accent-b); transform: translateY(-2px); }
+  .btn-copy-ig svg { width: 14px; height: 14px; }
   .ig-hint {
     margin-top: 10px;
     font-size: 12px;
@@ -665,11 +690,17 @@
     padding: 16px 18px;
     text-align: center;
   }
+  .note-btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   .btn-note-download {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 11px 24px;
+    padding: 11px 22px;
     border-radius: 40px;
     font-family: 'Zen Kaku Gothic New', sans-serif;
     font-size: 13px;
@@ -685,6 +716,24 @@
   }
   .btn-note-download:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(65,201,180,0.45); }
   .btn-note-download svg { width: 16px; height: 16px; }
+  .btn-copy-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid rgba(65,201,180,0.4);
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: #fff;
+    color: var(--text);
+  }
+  .btn-copy-note:hover { border-color: #41c9b4; color: #41c9b4; transform: translateY(-2px); }
+  .btn-copy-note svg { width: 14px; height: 14px; }
   .note-hint {
     margin-top: 10px;
     font-size: 12px;
@@ -696,18 +745,11 @@
   /* ===== Threads シェアセクション ===== */
   .threads-section {
     margin-top: 16px;
-    background: #101010;
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.12);
     border-radius: 16px;
     padding: 16px 18px;
     text-align: center;
-  }
-  .threads-section-label {
-    font-size: 11px;
-    color: #888;
-    letter-spacing: 0.15em;
-    margin-bottom: 12px;
-    display: block;
   }
   .threads-btn-row {
     display: flex;
@@ -729,10 +771,10 @@
     transition: all 0.25s;
     letter-spacing: 0.03em;
     background: #fff;
-    color: #101010;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+    color: #1a1a1a;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
   }
-  .btn-threads:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.5); }
+  .btn-threads:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,0.55); }
   .btn-threads svg { width: 16px; height: 16px; }
   .btn-copy-threads {
     display: inline-flex;
@@ -744,18 +786,18 @@
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    border: 1.5px solid rgba(255,255,255,0.2);
+    border: 1.5px solid rgba(255,255,255,0.45);
     transition: all 0.25s;
     letter-spacing: 0.03em;
     background: transparent;
-    color: #ccc;
+    color: #e0e0e0;
   }
-  .btn-copy-threads:hover { border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-2px); }
+  .btn-copy-threads:hover { border-color: #fff; color: #fff; transform: translateY(-2px); }
   .btn-copy-threads svg { width: 14px; height: 14px; }
   .threads-hint {
     margin-top: 10px;
-    font-size: 11px;
-    color: #666;
+    font-size: 12px;
+    color: #aaa;
     line-height: 1.7;
   }
 
@@ -1556,7 +1598,7 @@
   .intro-points p{ font-size: 18px; line-height: 2; }                  /* 13→18 (1.38x) */
   .intro-body    { font-size: 19px; line-height: 2; }                  /* 14→19 (1.36x) */
   .intro-voices p{ font-size: 18px; line-height: 2; }                  /* 13→18 (1.38x) */
-  .intro-themes  { font-size: 18px; line-height: 2; }                  /* 13→18 (1.38x) */
+  .intro-themes p{ font-size: 18px; line-height: 2; }                  /* 13→18 (1.38x) */
   .intro-closing em { font-size: 19px; }                               /* 14→19 (1.36x) */
   .type-name       { font-size: 16px; }                                /* 12→16 (1.33x) */
   .type-preview-caption { font-size: 15px; }                           /* 11→15 (1.36x) */
@@ -1630,10 +1672,16 @@
   .btn-share svg   { width: 22px; height: 22px; }
   .ig-section      { padding: 22px 26px; }
   .btn-ig-download { font-size: 18px; padding: 13px 22px; }
+  .btn-copy-ig     { font-size: 18px; padding: 13px 20px; }
   .ig-hint         { font-size: 15px; }
   .note-section    { padding: 22px 26px; }
   .btn-note-download { font-size: 18px; padding: 13px 22px; }
+  .btn-copy-note   { font-size: 18px; padding: 13px 20px; }
   .note-hint       { font-size: 15px; }
+  .threads-section { padding: 22px 26px; }
+  .btn-threads     { font-size: 18px; padding: 13px 26px; }
+  .btn-copy-threads { font-size: 18px; padding: 13px 20px; }
+  .threads-hint    { font-size: 15px; }
   .btn-retry       { font-size: 18px; margin-top: 26px; }
 
   /* ── メール画面 ── */
@@ -1871,23 +1919,34 @@
       </div>
       <!-- Instagram -->
       <div class="ig-section">
-        <button class="btn-ig-download" onclick="downloadImage()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          画像をダウンロード
-        </button>
-        <p class="ig-hint">📸 ダウンロードした画像を<br><span>Instagramに投稿</span>してシェアしてね！</p>
+        <div class="ig-btn-row">
+          <button class="btn-ig-download" onclick="downloadImage()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            画像をダウンロード
+          </button>
+          <button class="btn-copy-ig" onclick="copyShareText('ig')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            テキストをコピー
+          </button>
+        </div>
+        <p class="ig-hint">📸 画像をダウンロード＆テキストをコピーして<br><span>Instagramに投稿</span>してシェアしてね！</p>
       </div>
       <!-- note シェア -->
       <div class="note-section">
-        <button class="btn-note-download" onclick="downloadImage()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-          画像をダウンロード
-        </button>
-        <p class="note-hint">📝 ダウンロードした画像を<br><span>noteに添付</span>してシェアしてね！</p>
+        <div class="note-btn-row">
+          <button class="btn-note-download" onclick="downloadImage()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            画像をダウンロード
+          </button>
+          <button class="btn-copy-note" onclick="copyShareText('note')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            テキストをコピー
+          </button>
+        </div>
+        <p class="note-hint">📝 画像をダウンロード＆テキストをコピーして<br><span>noteに添付</span>してシェアしてね！</p>
       </div>
       <!-- Threads シェア -->
       <div class="threads-section">
-        <span class="threads-section-label">SHARE ON THREADS</span>
         <div class="threads-btn-row">
           <button class="btn-threads" onclick="shareThreads()">
             <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2296,6 +2355,11 @@ async function copyToClipboard(str) {
   } catch(e) {
     showCopyToast('⚠️ コピーに失敗しました。手動でコピーしてください');
   }
+}
+
+function copyShareText(platform) {
+  const { text } = getThreadsShareText(); // 同じシェアテキスト生成関数を流用
+  copyToClipboard(text);
 }
 
 async function shareThreads() {
