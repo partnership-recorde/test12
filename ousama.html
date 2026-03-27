@@ -362,6 +362,149 @@
   }
   .ig-hint span { color: var(--accent-a); font-weight: 700; }
 
+  /* ===== note シェアセクション ===== */
+  .note-section {
+    margin-top: 16px;
+    background: var(--blush);
+    border: 1px solid rgba(212,160,181,0.2);
+    border-radius: 16px;
+    padding: 16px 18px;
+    text-align: center;
+  }
+  .note-btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-note-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: #41c9b4;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(65,201,180,0.35);
+  }
+  .btn-note-download:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(65,201,180,0.45); }
+  .btn-note-download svg { width: 16px; height: 16px; }
+  .btn-copy-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid rgba(65,201,180,0.4);
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: #fff;
+    color: var(--text);
+  }
+  .btn-copy-note:hover { border-color: #41c9b4; color: #41c9b4; transform: translateY(-2px); }
+  .btn-copy-note svg { width: 14px; height: 14px; }
+  .note-hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .note-hint span { color: #41c9b4; font-weight: 600; }
+
+  /* ===== Threads シェアセクション ===== */
+  .threads-section {
+    margin-top: 16px;
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 16px 18px;
+    text-align: center;
+  }
+  .threads-btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-threads {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: #fff;
+    color: #000;
+    box-shadow: 0 4px 14px rgba(255,255,255,0.15);
+  }
+  .btn-threads:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(255,255,255,0.25); }
+  .btn-threads svg { width: 16px; height: 16px; }
+  .btn-copy-threads {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 40px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    transition: all 0.25s;
+    letter-spacing: 0.03em;
+    background: transparent;
+    color: #fff;
+  }
+  .btn-copy-threads:hover { border-color: #fff; transform: translateY(-2px); }
+  .btn-copy-threads svg { width: 14px; height: 14px; }
+  .threads-hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  /* トースト通知 */
+  #copy-toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(30,30,30,0.92);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 200;
+  }
+  #copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   /* ── 固定フッターCTA ── */
   .fixed-cta {
     position: fixed;
@@ -467,6 +610,32 @@
         </button>
         <p class="ig-hint">📸 ダウンロードした画像を<br><span>Instagramに投稿</span>してシェアしてね！</p>
       </div>
+      <div class="note-section">
+        <div class="note-btn-row">
+          <button class="btn-note-download" onclick="downloadImage()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            画像をダウンロード
+          </button>
+          <button class="btn-copy-note" onclick="copyShareText('note')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            テキストをコピー
+          </button>
+        </div>
+        <p class="note-hint">📝 画像とテキストを<span>noteに投稿</span>してシェアしてね！</p>
+      </div>
+      <div class="threads-section">
+        <div class="threads-btn-row">
+          <button class="btn-threads" onclick="shareThreads()">
+            <svg viewBox="0 0 192 192" fill="currentColor"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.723 74.204 17.408 97.013 17.239c22.975.17 40.526 7.52 52.171 21.847 5.785 7.026 10.198 15.88 13.162 26.293l16.27-4.334c-3.59-13.265-9.381-24.468-17.375-33.358-15.044-18.249-37.114-27.699-65.578-28.096l-.58.002C67.01 2.252 43.309 11.894 27.154 31.024 12.567 48.384 5.433 73.198 5.24 96.007c.193 22.809 7.327 47.623 21.914 65.083 16.155 19.13 39.856 28.771 68.444 28.981h.58c25.502-.18 44.531-6.95 60.026-22.288 20.652-20.514 19.961-46.105 13.194-61.876-4.702-11.267-13.711-20.458-17.861-16.919ZM96.68 146.759c-10.277.574-20.966-2.025-27.616-6.589-5.196-3.301-7.879-7.801-8.105-13.372-.477-10.66 7.64-17.68 24.168-18.646 2.116-.122 4.206-.182 6.27-.182 6.024 0 11.668.557 16.858 1.629-1.913 23.836-11.817 36.56-11.575 37.16Z"/></svg>
+            Threadsでシェア
+          </button>
+          <button class="btn-copy-threads" onclick="copyThreadsText()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            テキストをコピー
+          </button>
+        </div>
+        <p class="threads-hint">📋 コピー後、Threadsアプリに貼り付けて投稿できます</p>
+      </div>
     </div>
   </div>
 </div>
@@ -483,6 +652,73 @@ function downloadImage() {
   a.href = img.src;
   a.download = 'partnership-result-ousama.jpg';
   a.click();
+}
+</script>
+<div id="copy-toast"></div>
+
+<script>
+// ============================================================
+// SNS シェア機能（note / Threads）
+// ============================================================
+const BASE_URL = "https://partnership-recorde.github.io/test12/";
+const SHARE_TEXT = "私の診断結果は「王様」でした！\n#パートナーシップ・レコード";
+const SHARE_URL = BASE_URL + "ousama.html";
+
+function showCopyToast(msg) {
+  const toast = document.getElementById("copy-toast");
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+async function _copyToClipboardWithMsg(str, successMsg) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(str);
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = str;
+      ta.style.cssText = "position:fixed;opacity:0;top:0;left:0";
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    showCopyToast(successMsg);
+  } catch(e) {
+    showCopyToast("⚠️ コピーに失敗しました。手動でコピーしてください");
+  }
+}
+
+function copyShareText(platform) {
+  const copyText = SHARE_TEXT + "\n" + SHARE_URL;
+  const msgs = {
+    note: "📋 コピーしました！noteに貼り付けて投稿してね",
+  };
+  const msg = msgs[platform] || "📋 コピーしました！";
+  _copyToClipboardWithMsg(copyText, msg);
+}
+
+async function shareThreads() {
+  if (navigator.share) {
+    try {
+      await navigator.share({ text: SHARE_TEXT, url: SHARE_URL });
+    } catch(e) {
+      if (e.name !== "AbortError") {
+        _copyToClipboardWithMsg(SHARE_TEXT + "\n" + SHARE_URL,
+          "📋 コピーしました！Threadsアプリに貼り付けて投稿してね");
+      }
+    }
+  } else {
+    _copyToClipboardWithMsg(SHARE_TEXT + "\n" + SHARE_URL,
+      "📋 コピーしました！Threadsアプリに貼り付けて投稿してね");
+  }
+}
+
+function copyThreadsText() {
+  _copyToClipboardWithMsg(SHARE_TEXT + "\n" + SHARE_URL,
+    "📋 コピーしました！Threadsアプリに貼り付けて投稿してね");
 }
 </script>
 </body>
