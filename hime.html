@@ -338,6 +338,12 @@
     text-align: center;
     margin-top: 12px;
   }
+  .ig-btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   .btn-ig-download {
     display: inline-flex;
     align-items: center;
@@ -354,6 +360,24 @@
     font-family: 'Zen Kaku Gothic New', sans-serif;
   }
   .btn-ig-download svg { width: 16px; height: 16px; }
+  .btn-copy-ig {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    border: 1.5px solid rgba(212,160,181,0.5);
+    background: #fff;
+    color: var(--text);
+    transition: all 0.25s;
+  }
+  .btn-copy-ig:hover { border-color: var(--accent-b); color: var(--accent-b); transform: translateY(-2px); }
+  .btn-copy-ig svg { width: 14px; height: 14px; }
   .ig-hint {
     font-size: 11px;
     color: var(--muted);
@@ -361,6 +385,28 @@
     line-height: 1.8;
   }
   .ig-hint span { color: var(--accent-a); font-weight: 700; }
+
+  #copy-toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    white-space: nowrap;
+    z-index: 9999;
+  }
+  #copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 
   /* ── 固定フッターCTA ── */
   .fixed-cta {
@@ -418,6 +464,7 @@
     .btn-share svg   { width: 22px; height: 22px; }
     .ig-section      { padding: 22px 26px; }
     .btn-ig-download { font-size: 18px; padding: 13px 22px; }
+    .btn-copy-ig     { font-size: 18px; padding: 13px 22px; }
     .ig-hint         { font-size: 15px; }
     .fixed-cta a     { font-size: 20px; padding: 22px 32px; }
   }
@@ -448,7 +495,7 @@
       <span class="share-label">SHARE YOUR TYPE</span>
       <div class="share-buttons">
         <a class="btn-share btn-x"
-           href="https://twitter.com/intent/tweet?text=私のパートナーシップタイプは「姫」でした👸\n内なる世界に宿る強さ\n%23パートナーシップOS診断&url=https%3A%2F%2Fpartnership-recorde.github.io%2Ftest12%2Fhime.html"
+           href="https://x.com/intent/post?text=%E7%A7%81%E3%81%AE%E3%83%91%E3%83%BC%E3%83%88%E3%83%8A%E3%83%BC%E3%82%B7%E3%83%83%E3%83%97%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AF%E3%80%8C%E5%A7%AB%E3%80%8D%E3%81%A7%E3%81%97%E3%81%9F%F0%9F%8C%B8%0A%E6%84%9F%E6%80%A7%E3%81%A7%E4%B8%96%E7%95%8C%E3%82%92%E5%BD%A9%E3%82%8B%E3%80%8C%E6%84%9F%E6%80%A7%E3%81%AE%E6%BA%90%E6%B3%89%E3%80%8D%0A%23%E3%83%91%E3%83%BC%E3%83%88%E3%83%8A%E3%83%BC%E3%82%B7%E3%83%83%E3%83%97OS%E8%A8%BA%E6%96%AD&url=https%3A%2F%2Fpartnership-recorde.github.io%2Ftest12%2Fhime.html"
            target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           Xでシェア
@@ -461,10 +508,16 @@
         </a>
       </div>
       <div class="ig-section">
-        <button class="btn-ig-download" onclick="downloadImage()">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          画像をダウンロード
-        </button>
+        <div class="ig-btn-row">
+          <button class="btn-ig-download" onclick="downloadImage()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            画像をダウンロード
+          </button>
+          <button class="btn-copy-ig" onclick="copyIgText()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            テキストをコピー
+          </button>
+        </div>
         <p class="ig-hint">📸 ダウンロードした画像を<br><span>Instagramに投稿</span>してシェアしてね！</p>
       </div>
     </div>
@@ -476,13 +529,59 @@
   <a href="https://partnership-recorde.github.io/test12/">診断する</a>
 </div>
 
+<div id="copy-toast"></div>
+
 <script>
+const BASE_URL = "https://partnership-recorde.github.io/test12/";
+const SHARE_TEXT = "私のパートナーシップタイプは「姫」でした🌸\n感性で世界を彩る「感性の源泉」\n#パートナーシップOS診断";
+const SHARE_URL = BASE_URL + "hime.html";
+
 function downloadImage() {
   const img = document.querySelector('.result-image');
   const a = document.createElement('a');
   a.href = img.src;
   a.download = 'partnership-result-hime.jpg';
   a.click();
+}
+
+function showCopyToast(msg) {
+  const t = document.getElementById('copy-toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+function _copyToClipboardWithMsg(text, msg) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => showCopyToast(msg));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    showCopyToast(msg);
+  }
+}
+
+function copyShareText(platform) {
+  _copyToClipboardWithMsg(SHARE_TEXT + "\n" + SHARE_URL,
+    "📋 コピーしました！noteに貼り付けて投稿してね");
+}
+
+function shareThreads() {
+  const url = "https://www.threads.net/intent/post?text=" +
+    encodeURIComponent(SHARE_TEXT + "\n" + SHARE_URL);
+  window.open(url, '_blank');
+}
+
+function copyThreadsText() {
+  _copyToClipboardWithMsg(SHARE_TEXT + "\n" + SHARE_URL,
+    "📋 コピーしました！Threadsアプリに貼り付けて投稿してね");
+}
+
+function copyIgText() {
+  _copyToClipboardWithMsg(SHARE_TEXT + "\n" + SHARE_URL,
+    "📋 コピーしました！Instagramに貼り付けて投稿してね");
 }
 </script>
 </body>
