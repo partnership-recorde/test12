@@ -2193,13 +2193,18 @@ function updateRatingUI(val) {
 
 function nextQuestion() {
   const val = selectedRating;
-  // 現在の回答を履歴に保存
-  answerHistory[currentQ] = val;
   const type = TYPE_MAP[currentQ % 4];
-  // 戻って再回答の場合はスコアを上書き（差分調整）
-  scores[type] += val;
+  // 戻って再回答した場合は差分だけ加算（初回は旧値なし → そのまま加算）
+  const oldVal = answerHistory[currentQ];
+  if (oldVal !== undefined) {
+    scores[type] += (val - oldVal); // 差分のみ反映
+  } else {
+    scores[type] += val;
+  }
+  // 回答を保存
+  answerHistory[currentQ] = val;
   currentQ++;
-  selectedRating = 3;
+  selectedRating = answerHistory[currentQ] !== undefined ? answerHistory[currentQ] : 3;
   if (currentQ < 60) {
     showQuestion();
   } else {
@@ -2210,13 +2215,15 @@ function nextQuestion() {
 
 function prevQuestion() {
   if (currentQ === 0) return;
-  // 前に進んでいたスコアを巻き戻す
+  // スコアを巻き戻す（answerHistoryは消さず保持）
   currentQ--;
   const type = TYPE_MAP[currentQ % 4];
-  const prevVal = answerHistory[currentQ] || 3;
-  scores[type] -= prevVal;
-  answerHistory[currentQ] = undefined;
-  selectedRating = prevVal;
+  const prevVal = answerHistory[currentQ];
+  if (prevVal !== undefined) {
+    scores[type] -= prevVal;
+  }
+  // 保存済みの回答を復元して表示（消さない）
+  selectedRating = prevVal !== undefined ? prevVal : 3;
   showQuestion();
 }
 
